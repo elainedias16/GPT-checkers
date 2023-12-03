@@ -12,10 +12,10 @@ class Piece:
         self.color = color
         self.queen =  False
 
-        if self.color == DARK:
-            self.direction = -1   # Dark pieces move up, so they decrease in numbers on pygame board
-        else:    
-            self.direction = 1    # Light pieces move down, so they increase in numbers on pygame board
+        # if self.color == DARK:
+        #     self.direction = -1   # Dark pieces move up, so they decrease in numbers on pygame board
+        # else:    
+        #     self.direction = 1    # Light pieces move down, so they increase in numbers on pygame board
 
         self.x = 0
         self.y = 0

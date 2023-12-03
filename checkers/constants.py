@@ -14,6 +14,8 @@ DARK = (101, 67, 33)
 LIGHT = (255, 235, 176)
 
 GREY = (128, 128, 128)
+# GREEN = (144, 238, 144)
+GREEN = (34, 139, 34)
 
 CROWN = pygame.transform.scale(pygame.image.load('checkers/assets/crown.png'), (44, 25))
 
