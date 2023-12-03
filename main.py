@@ -15,11 +15,11 @@ def get_new_position_from_human(pos):
     return row, col
 
 
-
 def main():
     run = True
     clock = pygame.time.Clock()
     board = Board()
+    board.show_board()
 
     # piece = board.get_piece(0, 1)
     # board.move(piece, 4, 3)
@@ -33,6 +33,7 @@ def main():
 
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                pass
                 # pos = pygame.mouse.get_pos()
                 # row, col = get_new_position_from_human(pos)
                 # piece = board.get_piece(row, col)
@@ -40,6 +41,7 @@ def main():
     
         board.draw(WIN)
         pygame.display.update()
+
 
     pygame.quit()
 

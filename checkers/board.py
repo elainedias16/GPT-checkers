@@ -53,4 +53,18 @@ class Board():
                 if piece != 0:
                     piece.draw(win)
 
+    
+    def show_board(self):
+        for row in range(ROWS):
+            for col in range(COLS):
+                piece = self.board[row][col]
+                if piece != 0:
+                    piece_str = "Piece: ({}, {}) - Color: {} - Queen: {}".format(
+                        row, col, "Light" if piece.color == LIGHT else "Dark", "Yes" if piece.queen else "No"
+                    )
+                    print(piece_str)
+                else:
+                    print("No piece at ({}, {})".format(row, col))
+            print("\n")
+
  
