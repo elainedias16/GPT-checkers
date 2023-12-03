@@ -30,6 +30,7 @@ class Piece:
 
     def make_queen(self):
         self.queen = True
+        
 
     def draw(self, win):
         radius = SQUARE_SIZE // 2 - self.PADDING
@@ -38,7 +39,10 @@ class Piece:
         if self.queen:
             win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2 ))
 
-
+    def move(self, row, col):
+        self.row = row
+        self.col = col
+        self.calc_pos()
 
 
     def __repr__(self):
