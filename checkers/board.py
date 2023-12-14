@@ -58,6 +58,7 @@ class Board():
 
     
     def show_board(self):
+
         for row in range(ROWS):
             for col in range(COLS):
                 piece = self.board[row][col]
@@ -69,6 +70,10 @@ class Board():
                 else:
                     print("No piece at ({}, {})".format(row, col))
             print("\n")
+
+
+ 
+                        
 
 
     def get_valid_moves(self, piece):
@@ -185,6 +190,30 @@ class Board():
             return "DARK"
         else :
             return None
+        
+
+
+    def capture_board_to_gpt(self):
+        color = ''
+        queen = ''
+        board = []
+        for row in range(ROWS):
+            for col in range(COLS):
+                piece = self.board[row][col]
+                if piece != 0:
+                    if piece.color == LIGHT:
+                        color = "L"
+                    else:
+                        color = "D"
+
+                    if piece.queen:
+                        queen = "Y"
+                    else:
+                        queen = "N"
+                    
+                    board.append([(row, col), color, queen])
+        return board
+
 
 
 

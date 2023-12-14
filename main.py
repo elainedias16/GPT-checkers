@@ -3,6 +3,8 @@ from checkers.constants import WIDTH, HEIGHT, LIGHT, SQUARE_SIZE, DARK, GREY, GR
 from checkers.board import Board
 from checkers.game import Game
 
+from checkers.gpt_player import GPTPlayer
+
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH , HEIGHT))
 
@@ -25,14 +27,7 @@ def main():
         clock.tick(FPS)
 
         if (game.winner() != None):
-            # font = pygame.font.Font(None, 36)
-            # winner = game.winner()
             print(game.winner())
-            # winner_text = winner + " wins!"
-            # text = font.render(winner_text, True, (255, 255, 255))  # Render the text
-            # text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))  # Center the text on the screen
-            # WIN.blit(text, text_rect)  # Draw the text on the screen
-            # pygame.display.update()  # Update the display
             run = False
 
         for event in pygame.event.get():
@@ -44,12 +39,31 @@ def main():
                 pos = pygame.mouse.get_pos()
                 row, col = get_new_position_from_human(pos)
                 game.select(row, col)
-                game.board.show_board()
-    
+
+                # if(game.select(row, col) == True):
+                #     board_now = game.board.capture_board_to_gpt()
+                #     print(board_now)
+                #     break;
+                # game.board.show_board()
+                
         game.update()
+        # if(game.update() == True):
+        #     board_now = game.board.capture_board_to_gpt()
+        #     print(board_now)
+        #     break;
+
+
 
 
     pygame.quit()
 
 
-main()
+# main()
+
+board =" [[(0, 1), 'L', 'N'], [(0, 3), 'L', 'N'], [(0, 5), 'L', 'N'], [(0, 7), 'L', 'N'], [(1, 0), 'L', 'N'], [(1, 2), 'L', 'N'], [(1, 4), 'L', 'N'], [(1, 6), 'L', 'N'], [(2, 1), 'L', 'N'], [(2, 3), 'L', 'N'], [(2, 5), 'L', 'N'], [(2, 7), 'L', 'N'], [(5, 0), 'D', 'N'], [(5, 2), 'D', 'N'], [(5, 4), 'D', 'N'], [(5, 6), 'D', 'N'], [(6, 1), 'D', 'N'], [(6, 3), 'D', 'N'], [(6, 5), 'D', 'N'], [(6, 7), 'D', 'N'], [(7, 0), 'D', 'N'], [(7, 2), 'D', 'N'], [(7, 4), 'D', 'N'], [(7, 6), 'D', 'N']]"
+    
+player = GPTPlayer()
+output = player.send_question(board)
+
+
+answer = player.get_answer(output)
