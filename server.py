@@ -1,12 +1,19 @@
-from password import API_KEY
+import replicate
 import requests
 import json
 
-headers = {"Authorization": f"Bearer {API_KEY}"}
-link = "https://api.openai.com/v1/models"
-request = requests.get(link, headers=headers)
-print(request)
-print(request.text)
+replicate.api_token = 'r8_RgGjrj786JKi1eyB6ZheXOpFBex7feL4El4qH'
+
+replicate.run(
+  "stability-ai/stable-diffusion:27b93a2413e7f36cd83da926f3656280b2931564ff050bf9575f1fdf9bcd7478",
+  input={"prompt": "a 19th century portrait of a wombat gentleman"}
+)
+
+# headers = {"Authorization": f"Bearer {replicate.api_token}"}
+# link = "https://api.openai.com/v1/models"
+# request = requests.get(link, headers=headers)
+# print(request)
+# print(request.text)
 
 
 # headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type" : "application/json"}

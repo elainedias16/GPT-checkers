@@ -44,7 +44,7 @@ def main():
                 pos = pygame.mouse.get_pos()
                 row, col = get_new_position_from_human(pos)
                 game.select(row, col)
-
+                game.board.show_board()
     
         game.update()
 

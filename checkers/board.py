@@ -38,8 +38,10 @@ class Board():
                 if col % 2 == ((row + 1) % 2):  # if the current column if we are on is divisible by 2, and if is that equal to the remainder of the current row + 1 divided by 2
                     if row < 3:
                         self.board[row].append(Piece(row, col, LIGHT))
+
                     elif row > 4:
                         self.board[row].append(Piece(row, col, DARK))
+
                     else:
                         self.board[row].append(0)   # This square starts with no piece
                 else:
