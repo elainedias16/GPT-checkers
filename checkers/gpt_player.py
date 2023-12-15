@@ -5,11 +5,14 @@ from server_replicate import server_replicate
 class GPTPlayer:
     def __init__(self):
         self.server_replicate = server_replicate()
-        self.txt = "Hi, let's play checkers! I'm sending you a board for analysis. Please send me your best valid move."
+        self.txt = "Hi, let's play checkers! I'm sending you a board for analysis. D means dark, L means light, N means not queen and Y means queen. The first element of the tuple is the row and the second is the column."
 
 
     def send_question(self, board):
-        question = self.txt + " The board is: " + board + " What is your move?"
+        print("entrei no send question")
+        question = self.txt + " The board is: " + board + " You're playing as dark. Choose the row and column where you want to go."
+        print('question')
+        print(question)
         output = self.server_replicate.call_api(question)
         return output
 

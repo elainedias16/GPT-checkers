@@ -7,13 +7,13 @@ class server_replicate():
     pass
 
   def call_api(self, input_question):
-    try:
-      output = replicate.run(
-        "meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
-        input={"prompt": input_question}
-      )
-    except replicate.exceptions.ReplicateError as e:
-      print(f"Erro na API do Replicate: {e}")
+    # try:
+    output = replicate.run(
+      "meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
+      input={"prompt": input_question}
+    )
+    # except replicate.exceptions.ReplicateError as e:
+    #   print(f"Erro na API do Replicate: {e}")
     return output
 
 

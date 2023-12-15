@@ -22,7 +22,7 @@ class Game:
     def _init(self):
         self.selected = None
         self.board = Board()
-        self.turn = LIGHT
+        self.turn = LIGHT 
         self.valid_moves = {}
 
 

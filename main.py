@@ -5,6 +5,7 @@ from checkers.game import Game
 
 from checkers.gpt_player import GPTPlayer
 
+
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH , HEIGHT))
 
@@ -22,6 +23,7 @@ def main():
     run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
+    gptPlayer = GPTPlayer()
 
     while run:
         clock.tick(FPS)
@@ -35,12 +37,30 @@ def main():
                 run = False
 
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                row, col = get_new_position_from_human(pos)
-                game.select(row, col)
-
-           
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #     pos = pygame.mouse.get_pos()
+            #     row, col = get_new_position_from_human(pos)
+            #     game.select(row, col)
+                
+            if game.turn == LIGHT:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    row, col = get_new_position_from_human(pos)
+                    game.select(row, col)
+                print("light turn")
+            else:
+                print("dark turn")
+                # if event.type == pygame.MOUSEBUTTONDOWN:
+                    # pos = pygame.mouse.get_pos()
+                    # row, col = get_new_position_from_human(pos)
+                    # game.select(row, col)
+                gptBoard = game.board.capture_board_to_gpt()
+                gptBoard_str = repr(gptBoard)
+                out = gptPlayer.send_question(gptBoard_str)
+                answer = gptPlayer.get_answer(out)
+                print(answer)
+                # game.select(answer[0], answer[1])
+                # print("dark turn end")
                 
         game.update()
      
