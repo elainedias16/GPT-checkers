@@ -47,10 +47,12 @@ class Game:
 
     def select(self, row, col):
         if self.selected:
+            print("selected: ", self.selected)
             result = self._move(row, col) # if the move is valid, then the piece will move
             if not result:  # if the move is not valid
                 self.selected = None
                 self.select(row, col)
+            print("result: ", result)
         
 
         piece = self.board.get_piece(row, col)
@@ -60,6 +62,23 @@ class Game:
             return True  #The selection was valid
         
         return False
+    
+    
+
+    def ai_move(self, row, col):
+        result = self._move(row, col)
+        if not result:
+            print("AI move not valid")
+            #self.ai_move(row, col)
+
+        piece = self.board.get_piece(row, col)
+        if piece != 0 and piece.color == self.turn:
+            self.selected = piece
+            self.valid_moves = self.board.get_valid_moves(piece)
+            return True  #The selection was valid
+        
+        return False
+       
 
 
 

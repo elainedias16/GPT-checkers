@@ -1,3 +1,4 @@
+import time
 import pygame
 from checkers.constants import WIDTH, HEIGHT, LIGHT, SQUARE_SIZE, DARK, GREY, GREEN
 from checkers.board import Board
@@ -10,6 +11,9 @@ FPS = 60
 WIN = pygame.display.set_mode((WIDTH , HEIGHT))
 
 pygame.display.set_caption('Checkers')
+
+text1 = "Hi, let's play checkers! I'm playing as Light and you as Dark. I'll start and sending you the board."
+
 
 
 def get_new_position_from_human(pos):
@@ -24,6 +28,10 @@ def main():
     clock = pygame.time.Clock()
     game = Game(WIN)
     gptPlayer = GPTPlayer()
+    # output = gptPlayer.send_question(text1)
+    # res = gptPlayer.get_answer(output)
+    # print(res)
+
 
     while run:
         clock.tick(FPS)
@@ -46,21 +54,24 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     row, col = get_new_position_from_human(pos)
+                    print("row, col: " , row, col)
                     game.select(row, col)
                 print("light turn")
-            else:
+            elif game.turn == DARK:
                 print("dark turn")
-                # if event.type == pygame.MOUSEBUTTONDOWN:
-                    # pos = pygame.mouse.get_pos()
-                    # row, col = get_new_position_from_human(pos)
-                    # game.select(row, col)
                 gptBoard = game.board.capture_board_to_gpt()
                 gptBoard_str = repr(gptBoard)
                 out = gptPlayer.send_question(gptBoard_str)
                 answer = gptPlayer.get_answer(out)
-                print(answer)
-                # game.select(answer[0], answer[1])
-                # print("dark turn end")
+                print("answer: ", answer)
+                # row, col = gptPlayer.send_gpt_answer_to_game(str(answer))
+                # print("row, col: " , row, col)
+                time.sleep(15)
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    row, col = get_new_position_from_human(pos)
+                    print("row, col: " , row, col)
+                    game.select(row, col)
                 
         game.update()
      
