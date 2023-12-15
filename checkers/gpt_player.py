@@ -1,6 +1,6 @@
-import replicate
-from .server_replicate import server_replicate
-
+import sys 
+sys.path.insert(1, '../server_replicate.py')
+from server_replicate import server_replicate
 
 class GPTPlayer:
     def __init__(self):
