@@ -47,6 +47,11 @@ class Piece:
 
     def __repr__(self):
         return str(self.color)
+    
+
+    def show_piece_to_gpt(self):
+        return self.row, self.col, self.color, self.queen
+        
 
 
 

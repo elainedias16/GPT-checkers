@@ -23,8 +23,12 @@ class server_replicate():
 
 
   def get_answer(self, output):
+    string = ''
     for item in output:
-        print(item, end="")
+        string += item
+        # print(item, end="")
+    # print("output: ", string)
+    return string
 
     
 

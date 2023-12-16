@@ -229,7 +229,36 @@ class Board():
                     
                     board.append([(row, col), color, queen])
         return board
+    
 
+
+    def gpt_valid_moves(self):
+        moves = []
+        for row in range(ROWS):
+            for col in range(COLS):
+                piece = self.board[row][col]
+                if piece != 0 and piece.color == DARK:
+                    moves_piece_aux = self.get_valid_moves(piece)
+                    moves_piece_aux = self.aux_gpt_valid_moves(moves_piece_aux)
+                    # print("moves_piece_aux: ", moves_piece_aux)
+                    if len(moves_piece_aux) != 0:
+                        queen = "Y" if piece.queen else "N"
+                        moves_piece = {
+                            (piece.row, piece.col, queen) : moves_piece_aux
+                        }
+                    
+                        moves.append(moves_piece)
+        
+        # print("moves: ", moves)
+        return moves
+        
+
+
+    def aux_gpt_valid_moves(self, moves):
+        moves_piece = []
+        for key in moves:
+            moves_piece.append(key)
+        return moves_piece
 
 
 
