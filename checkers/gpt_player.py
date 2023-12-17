@@ -37,12 +37,12 @@ class GPTPlayer:
         Your answer should be "My move is "piece position(x1,y1,)" to "(x2,y2)"", nothing more.
         '''
         self.move_txt = '''
-        I'm sending as well your possible moves in a array of dictionaries. 
+        You are playing checkers. You are playing with the dark pieces. I'm sending as well your possible moves in a array of dictionaries. 
         Each dictionary has a piece and its possible moves.
         The piece is the key and the value is an array of tuples. 
         Each tuple is a possible move. 
         Choose one piece and one of its moves.
-        Answer with "My move is "piece position(x1,y1,)" to "(x2,y2)"", nothing more
+        Answer with "My move is "piece position(x1,y1)" to "(x2,y2)"", nothing more
         '''
 
 
@@ -65,7 +65,7 @@ class GPTPlayer:
         Choose one piece and one of its moves.
         Answer with "My move is "piece position" to "chosen move"", nothing more
         '''
-        question = self.rules + "Board : " + board + text + "Moves : " + moves
+        question = self.rules + "Board : " + board + self.move_txt + "Moves : " + moves
         output = self.server_replicate.call_api(question)
         return output
 

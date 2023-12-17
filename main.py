@@ -83,7 +83,7 @@ def main():
                 #gptPlayer.send_gpt_answer_to_game(str(answer))
                 row, col, piece_row, piece_col, is_queen = gptPlayer.send_gpt_answer_to_game(str(answer))
                 game.ai_move(row, col, piece_row, piece_col, is_queen, gpt_moves)
-                game.turn = LIGHT
+                #game.turn = LIGHT
        
                 
         game.update()
