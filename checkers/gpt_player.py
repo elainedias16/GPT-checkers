@@ -30,12 +30,6 @@ class GPTPlayer:
         your dark pieces, "L" represents my light pieces.
             I will send you the board state for each move.
         '''
-        self.txt = '''
-        We're playing checkers and not chess.I'm playing as Light and you are playing as Dark. I'm sending you a board for analysis. 
-        D means dark, L means light, N means not queen and Y means queen. 
-        The first element of the tuple is the row and the second is the column. 
-        Your answer should be "My move is "piece position(x1,y1,)" to "(x2,y2)"", nothing more.
-        '''
         self.move_txt = '''
         You are playing checkers. You are playing with the dark pieces. I'm sending as well your possible moves in a array of dictionaries. 
         Each dictionary has a piece and its possible moves.
@@ -45,11 +39,6 @@ class GPTPlayer:
         Answer with "My move is "piece position(x1,y1)" to "(x2,y2)"", nothing more
         '''
 
-
-    # def send_question(self, board):
-    #     question = self.txt + "Board : " + board 
-    #     output = self.server_replicate.call_api(question)
-    #     return output
     def send_first_question(self):
         question = self.rules
         output = self.server_replicate.call_api(question)
@@ -57,14 +46,6 @@ class GPTPlayer:
 
         
     def send_question(self, board, moves, is_valid=True):
-        text = '''
-        I'm sending as well your possible moves in a array of dictionaries. 
-        Each dictionary has a piece and its possible moves.
-        The piece is the key and the value is an array of tuples. 
-        Each tuple is a possible move. 
-        Choose one piece and one of its moves.
-        Answer with "My move is "piece position" to "chosen move"", nothing more
-        '''
         text_move_invalid = '''
         The moviment you chose is invalid. Please, choose another in the following array of dictionaries.
         '''
@@ -73,11 +54,6 @@ class GPTPlayer:
         else:
             question = text_move_invalid + self.move_txt  + "Moves : " + moves
 
-            
-
-
-        
-        question = self.rules + "Board : " + board + self.move_txt + "Moves : " + moves
         output = self.server_replicate.call_api(question)
         return output
 
@@ -93,15 +69,6 @@ class GPTPlayer:
         row, col = numbers[-2:]
         is_queen = ''.join(char for char in numbers_and_char if char in ['N', 'Y'])
 
-        print("row, col, piece_row, piece_col, is_queen: ", row, col, piece_row, piece_col, is_queen)
+        # print("row, col, piece_row, piece_col, is_queen: ", row, col, piece_row, piece_col, is_queen)
         return row, col, piece_row, piece_col, is_queen
-    
-
-
-# board =" [[(0, 1), 'L', 'N'], [(0, 3), 'L', 'N'], [(0, 5), 'L', 'N'], [(0, 7), 'L', 'N'], [(1, 0), 'L', 'N'], [(1, 2), 'L', 'N'], [(1, 4), 'L', 'N'], [(1, 6), 'L', 'N'], [(2, 1), 'L', 'N'], [(2, 3), 'L', 'N'], [(2, 5), 'L', 'N'], [(2, 7), 'L', 'N'], [(5, 0), 'D', 'N'], [(5, 2), 'D', 'N'], [(5, 4), 'D', 'N'], [(5, 6), 'D', 'N'], [(6, 1), 'D', 'N'], [(6, 3), 'D', 'N'], [(6, 5), 'D', 'N'], [(6, 7), 'D', 'N'], [(7, 0), 'D', 'N'], [(7, 2), 'D', 'N'], [(7, 4), 'D', 'N'], [(7, 6), 'D', 'N']]"
-    
-# player = GPTPlayer()
-# output = player.send_question(board)
-
-
-# answer = player.get_answer(output)
+        

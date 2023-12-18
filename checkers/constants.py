@@ -10,8 +10,8 @@ SQUARE_SIZE = WIDTH//COLS
 BROWN = (139, 69, 19)            
 LIGHT_BROWN = (222, 184, 135)
 # Piece colors
-# DARK = (101, 67, 33)
-DARK = (0, 0, 0)
+SCREEN_FINAL_GAME = (101, 67, 33)
+DARK = (30, 30, 30) 
 
 LIGHT = (255, 235, 176)
 

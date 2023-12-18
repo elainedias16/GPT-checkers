@@ -11,12 +11,6 @@ class Piece:
         self.col = col
         self.color = color
         self.queen =  False
-
-        # if self.color == DARK:
-        #     self.direction = -1   # Dark pieces move up, so they decrease in numbers on pygame board
-        # else:    
-        #     self.direction = 1    # Light pieces move down, so they increase in numbers on pygame board
-
         self.x = 0
         self.y = 0
         self.calc_pos()
@@ -28,13 +22,12 @@ class Piece:
 
 
     def get_row(self):
-        print("row do get: ",self.row)
         return self.row
     
+    
     def get_col(self):
-        print("col do get: ", int(self.col))
         return self.col
-
+    
 
     def make_queen(self):
         self.queen = True
@@ -46,6 +39,7 @@ class Piece:
         pygame.draw.circle(win, self.color, (self.x, self.y), radius + self.OUTLINE)
         if self.queen:
             win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2 ))
+
 
     def move(self, row, col):
         self.row = row
@@ -60,17 +54,6 @@ class Piece:
     def show_piece_to_gpt(self):
         return self.row, self.col, self.color, self.queen
         
-
-
-
-## LIGHT PIECES ARE AT THE TOP OF THE BOARD
-## DARK PIECES ARE AT THE BOTTOM OF THE BOARD
-## PYGAME BOARD 
-
-# 00
-
-
-# 800
 
 
 
