@@ -27,6 +27,14 @@ class Piece:
         self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
 
 
+    def get_row(self):
+        print("row do get: ",self.row)
+        return self.row
+    
+    def get_col(self):
+        print("col do get: ", int(self.col))
+        return self.col
+
 
     def make_queen(self):
         self.queen = True

@@ -56,7 +56,7 @@ class GPTPlayer:
         return output
 
         
-    def send_question(self, board, moves):
+    def send_question(self, board, moves, is_valid=True):
         text = '''
         I'm sending as well your possible moves in a array of dictionaries. 
         Each dictionary has a piece and its possible moves.
@@ -65,6 +65,18 @@ class GPTPlayer:
         Choose one piece and one of its moves.
         Answer with "My move is "piece position" to "chosen move"", nothing more
         '''
+        text_move_invalid = '''
+        The moviment you chose is invalid. Please, choose another in the following array of dictionaries.
+        '''
+        if is_valid:
+            question = self.rules + "Board : " + board + self.move_txt + "Moves : " + moves
+        else:
+            question = text_move_invalid + self.move_txt  + "Moves : " + moves
+
+            
+
+
+        
         question = self.rules + "Board : " + board + self.move_txt + "Moves : " + moves
         output = self.server_replicate.call_api(question)
         return output
@@ -80,6 +92,8 @@ class GPTPlayer:
         piece_row, piece_col = numbers[0:2]
         row, col = numbers[-2:]
         is_queen = ''.join(char for char in numbers_and_char if char in ['N', 'Y'])
+
+        print("row, col, piece_row, piece_col, is_queen: ", row, col, piece_row, piece_col, is_queen)
         return row, col, piece_row, piece_col, is_queen
     
 

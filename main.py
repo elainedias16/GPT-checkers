@@ -1,6 +1,6 @@
 import time
 import pygame
-from checkers.constants import WIDTH, HEIGHT, LIGHT, SQUARE_SIZE, DARK, GREY, GREEN
+from checkers.constants import NUM_CHANCES, WIDTH, HEIGHT, LIGHT, SQUARE_SIZE, DARK, GREY, GREEN
 from checkers.board import Board
 from checkers.game import Game
 
@@ -34,15 +34,13 @@ def main():
     clock = pygame.time.Clock()
     game = Game(WIN)
  
-    gptPlayer = GPTPlayer()
-    res = gptPlayer.send_first_question()
-    out = gptPlayer.get_answer(res)
-    print(out)
-    # print("-------------------------")
-   
-    #run = True
-    #clock = pygame.time.Clock()
-    #game = Game(WIN)
+    # gptPlayer = GPTPlayer()
+    # res = gptPlayer.send_first_question()
+    # out = gptPlayer.get_answer(res)
+    # print(out)
+    # # print("-------------------------")
+    game.gpt_player.send_first_question()
+    count = 0
     
     while run:
         clock.tick(FPS)
@@ -65,25 +63,40 @@ def main():
             # elif game.turn == (255, 255, 255):
             #     print("light turn")
 
-
+            print("turn: ", game.get_turn())
             if game.turn == LIGHT:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     row, col = get_new_position_from_human(pos)
                     game.select(row, col)
+                count = 0
             elif game.turn == DARK:
                 gptBoard = game.board.capture_board_to_gpt()
                 gptBoard_str = repr(gptBoard)
                 gpt_moves = game.board.gpt_valid_moves()
                 gpt_moves_str = repr(gpt_moves)
-                out = gptPlayer.send_question(gptBoard_str, gpt_moves_str)
-                answer = gptPlayer.get_answer(out)
+                # out = gptPlayer.send_question(gptBoard_str, gpt_moves_str)
+                # answer = gptPlayer.get_answer(out)
+                # print("----answer----------")
+                # print(str(answer))
+                # row, col, piece_row, piece_col, is_queen = gptPlayer.send_gpt_answer_to_game(str(answer))
+                # count = 0
+                # game.ai_move(row, col, piece_row, piece_col, is_queen, gpt_moves, count)
+                out = game.gpt_player.send_question(gptBoard_str, gpt_moves_str)
+                answer = game.gpt_player.get_answer(out)
                 print("----answer----------")
                 print(str(answer))
-                #gptPlayer.send_gpt_answer_to_game(str(answer))
-                row, col, piece_row, piece_col, is_queen = gptPlayer.send_gpt_answer_to_game(str(answer))
-                game.ai_move(row, col, piece_row, piece_col, is_queen, gpt_moves)
-                #game.turn = LIGHT
+                row, col, piece_row, piece_col, is_queen =  game.gpt_player.send_gpt_answer_to_game(str(answer))
+                # game.ai_move(row, col, piece_row, piece_col, is_queen, gpt_moves)
+             
+                if(count < NUM_CHANCES):
+                    game.ai_move(row, col, piece_row, piece_col, is_queen, gpt_moves)
+                    count += 1
+                else:
+                    print("errie mais de 3x")
+                    game.ai_move_random(gpt_moves)
+              
+
        
                 
         game.update()

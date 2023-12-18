@@ -10,12 +10,16 @@ SQUARE_SIZE = WIDTH//COLS
 BROWN = (139, 69, 19)            
 LIGHT_BROWN = (222, 184, 135)
 # Piece colors
-DARK = (101, 67, 33)
+# DARK = (101, 67, 33)
+DARK = (0, 0, 0)
+
 LIGHT = (255, 235, 176)
 
 GREY = (128, 128, 128)
 # GREEN = (144, 238, 144)
 GREEN = (34, 139, 34)
+
+NUM_CHANCES = 3
 
 CROWN = pygame.transform.scale(pygame.image.load('checkers/assets/crown.png'), (44, 25))
 
