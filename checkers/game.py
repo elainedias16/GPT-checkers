@@ -64,7 +64,6 @@ class Game:
             if not result:  # if the move is not valid
                
                 if self.turn == LIGHT:
-                    print("entrei no if light")
                     self.selected = None
                     self.select(row, col)
                 elif self.turn == DARK:
@@ -139,11 +138,7 @@ class Game:
         print("---------GPt answer----------")
         print(str(answer))
         row, col, piece_row, piece_col, is_queen = self.gpt_player.send_gpt_answer_to_game(str(answer))
-
-        # if(len(gpt_moves) == 0):
-        #     self.winner = LIGHT
-        #     return
-        
+  
         if(is_main):
             print("count: ", count)
             if(count+1 < NUM_CHANCES):

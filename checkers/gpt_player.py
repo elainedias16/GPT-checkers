@@ -1,11 +1,11 @@
 import re
 import sys
 sys.path.insert(1, '../server_replicate.py')
-from server_replicate import server_replicate
+from server_replicate import ServerReplicate
 
 class GPTPlayer:
     def __init__(self):
-        self.server_replicate = server_replicate()
+        self.server_replicate = ServerReplicate()
         self.rules = '''
         Hello,
         I propose a game of checkers between us. I will play with the light 

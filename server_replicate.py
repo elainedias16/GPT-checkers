@@ -1,9 +1,9 @@
 import os
 import replicate
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_KtSOKTmWDGc5IuJhmkHW9fcvB5Soynq4BWwlP"
+os.environ["REPLICATE_API_TOKEN"] = "YOUR_API_TOKEN"
 
-class server_replicate():
+class ServerReplicate():
   def __init__(self):
     pass
 
