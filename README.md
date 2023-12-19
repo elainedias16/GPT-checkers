@@ -23,7 +23,7 @@ $ pip install replicate
 ```
 * Instale pygame
 ```
-$ pip install pyagme
+$ pip install pygame
 ```
 * Insira sua api-key no arquivo server_replicate na linha 4 em:
 ![Alt text](image.png)
